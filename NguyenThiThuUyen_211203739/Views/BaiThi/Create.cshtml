@@ -1,34 +1,35 @@
-﻿@model NguyenThiThuUyen_211203739.Models.HangHoa
+﻿
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/NguyenThiThuUyen_Layout.cshtml";
 }
+@model NguyenThiThuUyen_211203739.Models.HangHoa
+<h1>Nguyễn Thị Thu Uyên</h1>
+<h4>Thêm hàng hóa mới </h4>
 
-<h1>Create</h1>
 
-<h4>HangHoa</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MaLoai" class="control-label"></label>
+                <label asp-for="MaLoai" class="control-label">Loại sản phẩm</label>
                 <select asp-for="MaLoai" class ="form-control" asp-items="ViewBag.MaLoai"></select>
             </div>
             <div class="form-group">
-                <label asp-for="TenHang" class="control-label"></label>
+                <label asp-for="TenHang" class="control-label">Tên hàng</label>
                 <input asp-for="TenHang" class="form-control" />
                 <span asp-validation-for="TenHang" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Gia" class="control-label"></label>
+                <label asp-for="Gia" class="control-label">Giá</label>
                 <input asp-for="Gia" class="form-control" />
                 <span asp-validation-for="Gia" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Anh" class="control-label"></label>
+                <label asp-for="Anh" class="control-label">Ảnh</label>
                 <input asp-for="Anh" class="form-control" />
                 <span asp-validation-for="Anh" class="text-danger"></span>
             </div>

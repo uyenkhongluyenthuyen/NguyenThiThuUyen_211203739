@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NguyenThiThuUyen_211203739.Models;
 
@@ -6,8 +7,10 @@ namespace NguyenThiThuUyen_211203739.Controllers
 {
 	public class BaiThiController : Controller
 	{
-		QLHangHoaContext db = new QLHangHoaContext();
-		public IActionResult Index()
+        private QLHangHoaContext db = new QLHangHoaContext();
+
+       
+        public IActionResult Index()
 		{
 			var listHangHoa = db.HangHoas.Where(hh => hh.Gia >= 100).ToList();
 
@@ -22,17 +25,32 @@ namespace NguyenThiThuUyen_211203739.Controllers
 		}
 
 		//theem 2 action
+		[HttpGet]
+		
 		public IActionResult Create()
 		{
-			return View();
+			ViewBag.MaLoai = new SelectList(db.LoaiHangs.ToList(), "MaLoai", "TenLoai");
+            
+
+            return View();
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create(string ma)
+		public IActionResult Create(HangHoa hangHoa)
 		{
-			return View();
-		}
+			ViewBag.MaLoai = new SelectList(db.LoaiHangs.ToList(), "MaLoai", "TenLoai");
+           
+            if (ModelState.IsValid)
+			{
+                hangHoa.MaHang = db.HangHoas.ToList().Last<HangHoa>().MaHang + 1;
+                db.Add(hangHoa);
+				db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View();
+        }
 		
 
 
